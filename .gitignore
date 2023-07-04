@@ -104,3 +104,6 @@ print_reqs.py
 
 # mkdocs site
 site
+
+# large files
+data/snomed2fma/fma.body.owl
