@@ -1,6 +1,8 @@
-# LLMap
+# LLMap-Prelim
 
-This repository contains code for the poster paper: "Search-then-Match: Investigating a General Ontology Alignment Framework with Large Language Models".
+This repository contains code for the preliminary investigation of ontology alignment with large language models.
+
+The associated poster paper: "Exploring Large Language Models for Ontology Alignment".
 
 ## Dependencies
 
