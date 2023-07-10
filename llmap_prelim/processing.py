@@ -85,23 +85,24 @@ def integrated_template(
     src_parent_labels: list = None, 
     tgt_parent_labels: list = None, 
     src_child_labels: list = None, 
-    tgt_child_labels: list = None
+    tgt_child_labels: list = None,
+    compact_list: bool = False,
 ):
-    v = concept_template("Source Concept", src_concept_labels)
+    v = concept_template("Source Concept", src_concept_labels, compact_list)
     has_parent_child = False
     if src_parent_labels:
-        v += concept_template("Parents of Source Concept", src_parent_labels)
+        v += concept_template("Parents of Source Concept", src_parent_labels, compact_list)
         has_parent_child = True
     if src_child_labels:
-        v += concept_template("Children of Source Concept", src_child_labels)
+        v += concept_template("Children of Source Concept", src_child_labels, compact_list)
         has_parent_child = True
     v +="\n"
-    v += concept_template("Target Concept", tgt_concept_labels)
+    v += concept_template("Target Concept", tgt_concept_labels, compact_list)
     if tgt_parent_labels:
-        v += concept_template("Parents of Target Concept", tgt_parent_labels)
+        v += concept_template("Parents of Target Concept", tgt_parent_labels, compact_list)
         has_parent_child = True
     if tgt_child_labels:
-        v += concept_template("Children of Target Concept", tgt_child_labels)
+        v += concept_template("Children of Target Concept", tgt_child_labels, compact_list)
         has_parent_child = True
     v +="\n"
     if not has_parent_child:
