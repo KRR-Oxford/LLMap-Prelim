@@ -11,6 +11,6 @@ The associated poster paper: "Exploring Large Language Models for Ontology Align
 
 ## Studied LLMs
 - Flan-t5-xxl: https://huggingface.co/google/flan-t5-xxl
-- GPT-4: https://openai.com/gpt-4
+- GPT-3.5: https://platform.openai.com/docs/models
 
 
