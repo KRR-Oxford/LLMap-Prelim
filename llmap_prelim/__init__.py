@@ -84,7 +84,7 @@ def run_experiments(
                 result_dict[src_class_iri, tgt_class_iri][tgt_cand_iri] = (answer, score)
             else:
                 # the bertmap model has no "answer" but it can produce two types of scores
-                bertmap_score, bertmaplt_score = predictor.predict(src_class_labels, tgt_cand_labels)
+                bertmap_score, bertmaplt_score = predictor.predict(src_annotation_index[src_class_iri], tgt_annotation_index[tgt_cand_iri])
                 result_dict[src_class_iri, tgt_class_iri][tgt_cand_iri] = (bertmap_score, bertmaplt_score)
 
             temp_progress_bar.update()

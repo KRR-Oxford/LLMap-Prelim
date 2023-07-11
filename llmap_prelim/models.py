@@ -39,6 +39,7 @@ class LMPredictor:
         elif choice == "bertmap":
             # need to fine-tune first
             self.bertmap = bertmap_model
+            self.predict = self.bertmap_predict
 
     def gpt_predict(self, input_text: str, max_retries: int = 5):
         """GPT prediction function with exponential waiting time."""
