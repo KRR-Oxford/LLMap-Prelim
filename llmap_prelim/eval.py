@@ -26,7 +26,7 @@ def unpack_results_for_llm(result_dict: dict, threshold: float = 0.0):
         for tgt_cand, (answer, score) in v.items():
             mapping = EntityMapping(src_ref, tgt_cand, "=", score)
             # final prediction determines by "Yes" and/or threshold
-            if "Yes" in answer and score >= threshold:
+            if ("Yes" in answer or "yes" in answer or "are identical" in answer) and score >= threshold:
                 final_preds.append(mapping)
             else:
                 mapping.relation = "!="   

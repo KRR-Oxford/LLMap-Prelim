@@ -88,25 +88,27 @@ def integrated_template(
     tgt_child_labels: list = None,
     compact_list: bool = False,
 ):
-    v = concept_template("Source Concept", src_concept_labels, compact_list)
+    v = concept_template("Source Concept Names", src_concept_labels, compact_list)
     has_parent_child = False
     if src_parent_labels:
-        v += concept_template("Parents of Source Concept", src_parent_labels, compact_list)
+        v += concept_template("Parent Concepts of the Source Concept", src_parent_labels, compact_list)
         has_parent_child = True
     if src_child_labels:
-        v += concept_template("Children of Source Concept", src_child_labels, compact_list)
+        v += concept_template("Child Concepts of the Source Concept", src_child_labels, compact_list)
         has_parent_child = True
     v +="\n"
-    v += concept_template("Target Concept", tgt_concept_labels, compact_list)
+    v += concept_template("Target Concept Names", tgt_concept_labels, compact_list)
     if tgt_parent_labels:
-        v += concept_template("Parents of Target Concept", tgt_parent_labels, compact_list)
+        v += concept_template("Parent Concepts of the Target Concept", tgt_parent_labels, compact_list)
         has_parent_child = True
     if tgt_child_labels:
-        v += concept_template("Children of Target Concept", tgt_child_labels, compact_list)
+        v += concept_template("Child Concepts of the Target Concept", tgt_child_labels, compact_list)
         has_parent_child = True
     v +="\n"
     if not has_parent_child:
-        v += "Given the names of the above two concepts, are they identical (Yes/No)?"
+        v = "Given the lists of names associated with two concepts, your task is to determine whether these concepts are identical or not. Consider the following:\n\n" + v
+        v += "Analyze the names provided for each concept and provide a conclusion on whether these two concepts are identical or different (\"Yes\" or \"No\") based on their associated names."
     else:
-        v += "Given the names of the above two concepts and their parent and/or child concepts, are they identical (Yes/No)?"
+        v = "Given the lists of names and hierarchical relationships associated with two concepts, your task is to determine whether these concepts are identical or not. Please consider the following:\n\n" + v
+        v += "Analyze the names and the hierarchical information provided for each concept, and provide a conclusion on whether these two concepts are identical or different (\"Yes\" or \"No\") based on their associated names and hierarchical relationships."
     return v

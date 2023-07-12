@@ -70,7 +70,8 @@ def run_experiments(
             )
 
             if predictor.model_type != "bertmap":
-                compact_list = predictor.model_type == "flan-t5"
+                # compact_list = predictor.model_type == "flan-t5"
+                compact_list = False
                 input_text = integrated_template(
                     src_class_labels,
                     tgt_cand_labels,

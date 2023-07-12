@@ -46,23 +46,33 @@ class LMPredictor:
         retries = 0
         while True:
             try:
-                completion = openai.Completion.create(
-                    model="text-davinci-003",
-                    prompt=input_text,
-                    max_tokens=3,
+                
+                completion = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": input_text}],
+                    max_tokens=512,
                     temperature=0,
-                    logprobs=1,
                 )
-                answer = completion["choices"][0].text.strip()
-                logprobs = completion["choices"][0].logprobs
-                score = 0.0
-                for tk, tk_score in zip(logprobs.tokens, logprobs.token_logprobs):
-                    if "Yes" == tk:
-                        score = np.exp(tk_score)
-                        break
-                    elif "No" == tk:
-                        score = -np.exp(tk_score)  # assigning negative score
-                        break
+                answer = completion.choices[0].message.content.strip()
+                score = float("Yes" in answer or "yes" in answer or "are identical" in answer)
+                
+                # completion = openai.Completion.create(
+                #     model="text-davinci-003",
+                #     prompt=input_text,
+                #     max_tokens=3,
+                #     temperature=0,
+                #     logprobs=1,
+                # )
+                # answer = completion["choices"][0].text.strip()
+                # logprobs = completion["choices"][0].logprobs
+                # score = 0.0
+                # for tk, tk_score in zip(logprobs.tokens, logprobs.token_logprobs):
+                #     if "Yes" == tk:
+                #         score = np.exp(tk_score)
+                #         break
+                #     elif "No" == tk:
+                #         score = -np.exp(tk_score)  # assigning negative score
+                #         break
                 break
             except:
                 if retries == max_retries:
