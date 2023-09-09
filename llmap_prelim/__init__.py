@@ -12,7 +12,7 @@
 #    See the License for the specific language governing permissions and
 #   limitations under the License.
 from deeponto.onto import Ontology
-from deeponto.utils import FileUtils
+from deeponto.utils import load_file, save_file
 from collections import defaultdict
 import enlighten
 from pandas import DataFrame
@@ -32,7 +32,7 @@ def run_experiments(
 ):
 
     try:
-        result_dict = FileUtils.load_file(result_file)
+        result_dict = load_file(result_file)
     except:
         result_dict = defaultdict(dict)
 
@@ -91,4 +91,4 @@ def run_experiments(
             temp_progress_bar.update()
 
         progress_bar.update()
-        FileUtils.save_file(result_dict, result_file)
+        save_file(result_dict, result_file)
