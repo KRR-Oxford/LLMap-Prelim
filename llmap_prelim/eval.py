@@ -73,15 +73,15 @@ def unpack_results_for_bertmap(result_dict: dict, bertmap_threshold: float = 0.0
 
 def evaluate(final_preds, ranked_preds, refs, include_latex: bool = False):
 
-    yes_hit1 = 0
-    no_hit1 = 0
+    hits1 = 0
+    reject = 0
 
     _ranked = []
     for (src_ref, tgt_ref), cand_mappings in ranked_preds.items():
         if cand_mappings[0].tail == tgt_ref:
-            yes_hit1 += 1
+            hits1 += 1
         elif cand_mappings[0].relation == "!=" and tgt_ref == "UnMatched":
-            no_hit1 += 1
+            reject += 1
         else:
             pass
             # print((src_ref, tgt_ref))
@@ -92,9 +92,9 @@ def evaluate(final_preds, ranked_preds, refs, include_latex: bool = False):
     mrr = AlignmentEvaluator().mean_reciprocal_rank(_ranked[:50])
 
     all_scores = matching_scores
-    all_scores["Hits@1+"] = yes_hit1 / 50
-    all_scores["Hits@1-"] = no_hit1 / 50
+    all_scores["Hits@1"] = hits1 / 50
     all_scores["MRR"] = mrr
+    all_scores["RR"] = reject / 50
 
     if include_latex:
         print(" & ".join([str(round(s, 3)) for s in all_scores.values()]))
